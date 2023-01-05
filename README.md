@@ -15,10 +15,10 @@ DeepMHCII: A Novel Binding Core-Aware Deep Interaction Model for Accurate MHC II
 ## Experiments
 ```bash
 python main.py -d configure/dataset.yaml -m configure/deepmhcii.yaml # train and evaluation on independent test set.
-python main.py -d configure/dataset.yaml -m configure/deepmhcii.yaml --5cv # 5 cross-validation
-python main.py -d configure/dataset.yaml -m configure/deepmhcii.yaml --lomo # leave one molecule out cross-validation
-python main.py -d configure/dataset.yaml -m configure/deepmhcii.yaml --binding # binding core prediction (after model training)
-python main.py -d configure/dataset.yaml -m configure/deepmhcii.yaml --seq2logo # seq2logo
+python main.py -d configure/dataset.yaml -m configure/deepmhcii.yaml --mode 5cv # 5 cross-validation
+python main.py -d configure/dataset.yaml -m configure/deepmhcii.yaml --mode lomo # leave one molecule out cross-validation
+python main.py -d configure/dataset.yaml -m configure/deepmhcii.yaml --mode binding # binding core prediction (after model training)
+python main.py -d configure/dataset.yaml -m configure/deepmhcii.yaml --mode seq2logo # seq2logo
 ```
 
 ## Declaration
