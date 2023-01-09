@@ -18,7 +18,7 @@ python main.py -d configure/dataset.yaml -m configure/deepmhcii.yaml # train and
 python main.py -d configure/dataset.yaml -m configure/deepmhcii.yaml --mode 5cv # 5 cross-validation
 python main.py -d configure/dataset.yaml -m configure/deepmhcii.yaml --mode lomo # leave one molecule out cross-validation
 python main.py -d configure/dataset.yaml -m configure/deepmhcii.yaml --mode binding # binding core prediction (after model training)
-python main.py -d configure/dataset.yaml -m configure/deepmhcii.yaml --mode seq2logo # seq2logo
+python main.py -d configure/dataset.yaml -m configure/deepmhcii.yaml --mode seq2logo -a <allele> # seq2logo
 ```
 
 ## Declaration
