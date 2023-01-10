@@ -142,7 +142,7 @@ def main(data_cnf, model_cnf, mode, continue_train, start_id, num_models, allele
             correct += core_ == core
         logger.info(f'The number of correct prediction is {correct}.')
     elif mode == 'seq2logo':
-        model_cnf['padding'] = model_cnf['binding']
+        model_cnf['padding'] = model_cnf['seq2logo']
         assert allele in mhc_name_seq
         peptide_list, data_list = get_seq2logo_data(data_cnf['seq2logo'], allele, mhc_name_seq[allele],
                                                     model_cnf['model']['peptide_pad'])

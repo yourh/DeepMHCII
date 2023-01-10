@@ -20,6 +20,11 @@ binding:
   peptide_pad: 3
   mhc_len: 34
 
+seq2logo:
+  peptide_len: 15
+  peptide_pad: 0
+  mhc_len: 34
+
 train:
   batch_size: 128
   num_epochs: 20

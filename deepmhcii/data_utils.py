@@ -43,7 +43,7 @@ def get_binding_data(data_file, mhc_name_seq, peptide_pad=3, core_len=9):
 def get_seq2logo_data(data_file, mhc_name, mhc_seq, peptide_pad=3, core_len=9):
     data_list, peptide_list = [], []
     with open(data_file) as fp:
-        for k, line in enumerate(fp):
+        for line in fp:
             peptide_seq = line.strip()
             pad_peptide_seq = ACIDS[0] * peptide_pad + peptide_seq + ACIDS[0] * peptide_pad
             data_list += [(mhc_name, pad_peptide_seq[i: i + core_len + 2 * peptide_pad], mhc_seq, 0.0)
