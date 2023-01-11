@@ -44,8 +44,8 @@ def test(model, model_cnf, test_data):
 def get_binding_core(data_list, model_cnf, model_path, start_id, num_models, core_len=9):
     scores_list = []
     for model_id in range(start_id, start_id + num_models):
-        model = Model(DeepMHCII, model_path=model_path.with_stem(f'{model_path.stem}-{model_id}'),
-                      pooling=False, **model_cnf['model'])
+        model = Model(DeepMHCII, model_path=model_path.with_stem(f'{model_path.stem}-{model_id}'), pooling=False,
+                      **model_cnf['model'])
         scores_list.append(test(model, model_cnf, data_list))
     return (scores:=np.mean(scores_list, axis=0)).argmax(-1), scores
 
@@ -142,20 +142,18 @@ def main(data_cnf, model_cnf, mode, continue_train, start_id, num_models, allele
             correct += core_ == core
         logger.info(f'The number of correct prediction is {correct}.')
     elif mode == 'seq2logo':
-        model_cnf['padding'] = model_cnf['seq2logo']
         assert allele in mhc_name_seq
-        peptide_list, data_list = get_seq2logo_data(data_cnf['seq2logo'], allele, mhc_name_seq[allele],
-                                                    model_cnf['model']['peptide_pad'])
+        data_list = get_seq2logo_data(data_cnf['seq2logo'], allele, mhc_name_seq[allele])
         scores_list = []
         for model_id in range(start_id, start_id + num_models):
-            model = Model(DeepMHCII, model_path=model_path.with_stem(f'{model_path.stem}-{model_id}'),
+            model = Model(DeepMHCII, model_path=model_path.with_stem(f'{model_path.stem}-{model_id}'), pooling=False,
                           **model_cnf['model'])
             scores_list.append(test(model, model_cnf, data_list))
-        scores = np.mean(scores_list, axis=0).reshape(len(peptide_list), -1)
+        scores = np.mean(scores_list, axis=0)
         s_, p_ = scores.max(axis=1), scores.argmax(axis=1)
         with open(res_path.with_name(f'{res_path.stem}-seq2logo-{allele}.txt'), 'w') as fp:
             for k in (-s_).argsort()[:int(0.01 * len(s_))]:
-                print(peptide_list[k][p_[k]: p_[k] + 9], file=fp)
+                print(data_list[k][1][p_[k]: p_[k] + 9], file=fp)
 
 
 if __name__ == '__main__':

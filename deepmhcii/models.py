@@ -81,8 +81,8 @@ class Model(object):
     def predict(self, data_loader: DataLoader, valid=False, **kwargs):
         if not valid:
             self.load_model()
-        return np.hstack([self.predict_step(data_x, **kwargs)
-                          for data_x, _ in tqdm(data_loader, leave=False, dynamic_ncols=True)])
+        return np.concatenate([self.predict_step(data_x, **kwargs)
+                               for data_x, _ in tqdm(data_loader, leave=False, dynamic_ncols=True)], axis=0)
 
     def save_model(self):
         torch.save(self.model.state_dict(), self.model_path)
